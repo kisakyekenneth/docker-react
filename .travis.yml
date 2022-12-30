@@ -24,6 +24,8 @@ deploy:
   bucket_path: 'docker-react'
   on:
     branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_keys: '$AWS_SECRET_KEY'
 # By default: Travis CI is configured to deploy the app to any host like AWS, digital OCeans hence
 # It usnderstands when we say "provider: elasticbeanstalk"
 # REGION: copy from AWS :-Dockerreact-env.eba-ia2mxaq2.us-east-1.elasticbeanstalk.com  (e-m2z7gmrfa7)
