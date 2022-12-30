@@ -14,3 +14,24 @@ script:
   - docker run -e CI=true  kanyecope/docker-react npm run test -- --coverage --watchAll=false
 # This "Script section" has commands that need to be executed to actually run our test suite
 # Added  "-- --coverage" to help exit test run for travis to proceed otherwise.
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'docker-react'
+  env: 'Dockerreact-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-478721706705'
+  bucket_path: 'docker-react'
+  on:
+    branch: main
+# By default: Travis CI is configured to deploy the app to any host like AWS, digital OCeans hence
+# It usnderstands when we say "provider: elasticbeanstalk"
+# REGION: copy from AWS :-Dockerreact-env.eba-ia2mxaq2.us-east-1.elasticbeanstalk.com  (e-m2z7gmrfa7)
+# APP :- As Defined in AWS during project cretion
+# ENV: Environment name that was automatically set. Our App at AWS runs in ENV
+# BUCKET_NAME:- travis CI complies all our project into a single file, zips it and copies all to S3 bucket  (wc is a Hard Drive running on AWS)
+# ***** To get the bucket_name, Head to AWS (services), search for s3
+
+# BUCKET_PATH:- We can use the "APP" name we define. B'se AWS will create bucket_path in "S3" with the App name we specified
+
+# ON: Used to specify the branch travis CI shd keep watch over to be able to make deployment to AWS
