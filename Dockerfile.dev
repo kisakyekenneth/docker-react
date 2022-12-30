@@ -1,0 +1,22 @@
+# This file is to be used to run our applications in the dev't world
+FROM node:16-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+CMD [ "npm", "run", "start" ]
+
+# -------------------- TO RUN THIS CUSTOM DOCKERFILE -------------------
+# docker build -f Dockerfile.dev .
+# ---- "-f" is the parameter that helps specify which Dockerfile to run
+
+# -------------------- DELETE THE NODE_MODULES in OUR PROJECT FOLDER SINCE DOCKER WE CREATE ONE AFTER npm install
+
+# docker run -p 3000:3000 -v /app/node_modules -v ${pwd}:/app <image_id>
+
+# The above command runs the docker image with docker volumes mapping the project files with container files

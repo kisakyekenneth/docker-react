@@ -1,0 +1,20 @@
+version: '3'
+services: #Define the defferent containers below
+  react-app:
+    build:
+      context: . # Path to the project directory with our docker file
+      dockerfile: Dockerfile.dev  # Specifying our custom dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules #This is what will be ignores during the mapping since we want it to use what is in the container
+      - .:/app # Mapping the current project directory (.) with "/app" container directory
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+# For the tests service, we don't need to specify a ports
