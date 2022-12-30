@@ -13,3 +13,4 @@ before_install:
 script:
   - docker run kanyecope/docker-react npm run test -- --coverage
 # This "Script section" has commands that need to be executed to actually run our test suite
+# Added  "-- --coverage" to help exit test run for travis to proceed otherwise.
