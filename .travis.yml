@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+# We have told travis that before any build, our project requires docker setup
+
+before_install:
+  - docker build -t kanyecope/docker-react -f Dockerfile.dev .
+# We would have use "docker build -f Dockerfile.dev .": But that generates an image id which is kinder a challenge
+#  It becomes hard to predict which image_id will be generated, hence we use a tag having our docker_id
+# Note: this tag is only used in this project by travis to know what to do next
+
+script:
+  - docker run kanyecope/docker-react npm run test -- --coverage
+# This "Script section" has commands that need to be executed to actually run our test suite
