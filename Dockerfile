@@ -13,6 +13,8 @@ RUN npm run build
 
 # ---------------- OUR SECOND PHASE --------------
 FROM nginx
+EXPOSE 80
+# We expose port 80 for AWS elastic beanstalk to serve our application in the docker file
 # The next step helps us to copy build results from the previous stage  called "builder"
 # ---- /app/build is the location from the previous stage were we can locate the build static file
 # ---- /usr/share/nginx/html :- Is were we shall place our files copied
